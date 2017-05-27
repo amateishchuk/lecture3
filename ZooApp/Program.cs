@@ -6,8 +6,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using ZooClassLibrary.Abstract;
 using ZooClassLibrary.Concrete;
+using ZooClassLibrary.Concrete.Animals;
 using ZooClassLibrary.Concrete.Commands;
 using ZooClassLibrary.Concrete.ZooWorkers;
+using ZooClassLibrary.Enums;
 
 namespace ZooClassLibrary
 {
@@ -15,6 +17,11 @@ namespace ZooClassLibrary
     {
         static void Main(string[] args)
         {
+
+            //Animal animal = new Bear("LION");
+            //Console.WriteLine(animal.GetType().Name);
+
+
             IRepository repository = new ZooRepository();
             Person zooWorker = new ZooWorker();
 
@@ -24,13 +31,48 @@ namespace ZooClassLibrary
             var healCommand = new HealCommand(repository);
             var deleteCommand = new DeleteCommand(repository);
 
+            //repository.ShowAnimalsGroupedByKind();
+            //repository.ShowAnimalsByState(State.Full);
 
+            Console.BufferHeight = 200;
 
             TimerCallback destFunc = new TimerCallback(repository.ChangeRandomAnimalState);
             Timer changeRandomAnimalStateFiveSec = new Timer(destFunc, null, 5000, 5000);
 
             while (repository.IsAnythingAlive())
             {
+                Console.WriteLine("Name\t\tHP\tMaxHP\tState\n");
+
+                Console.WriteLine("Показать всех животных, сгруппированных по виду животного");
+                repository.ShowAnimalsGroupedByKind();
+
+                Console.WriteLine("Показать животных по состоянию - в параметрах передать Состояние");
+                repository.ShowAnimalsByState(State.Full);
+
+                Console.WriteLine("Показать всех тигров, которые больны");
+                repository.ShowTigersWhichAreSick();
+
+                Console.WriteLine("Показать слона с определенной кличкой, которая задается в параметре");
+                repository.ShowElephantWithSpecifiedName("Слониха");
+
+                Console.WriteLine("Показать список всех кличек животных, которые голодны");
+                repository.ShowAnimalsNamesWhichAreHungry();
+
+                Console.WriteLine("Показать самых здоровых животных каждого вида (по одному на каждый вид)");
+                repository.ShowTheHealthestAnimalEachKinds();
+
+                Console.WriteLine("Показать количество мертвых животных каждого вида");
+                repository.ShowCountDeadAnimalsEachKinds();
+
+                Console.WriteLine("Показать всех волков и медведей, у которых здоровье выше 3");
+                repository.ShowAllWolfAndBearsWhichHealthAboveThree();
+
+                Console.WriteLine("Показать животное с максимальным здоровьем и животное с минимальным здоровьем (описать одним выражением)");
+                repository.ShowAnimalWithMaxHealthAndAnimalWithMinHealth();
+
+                Console.WriteLine("Показать средней количество здоровья у животных в зоопарке");
+                repository.ShowAverageHealthAllAnimals();
+
                 zooWorker.Command = showAnimalsCommand;
                 zooWorker.Run();
 
@@ -64,20 +106,20 @@ namespace ZooClassLibrary
                         Console.WriteLine("Unknown command");
                         break;
                 }
-                Console.WriteLine();
+                
+                zooWorker.Run();
 
-                if (zooWorker.Command != null)
-                    zooWorker.Run();
+                Console.WriteLine("Press any button for continue...");
+                Console.ReadLine();
 
-                Console.WriteLine("Wait 2 sec...");
-                Thread.Sleep(2000);
                 Console.Clear();
 
             }
 
             zooWorker.Command = showAnimalsCommand;
             zooWorker.Run();
-            Console.WriteLine("All animals died");
+            Console.WriteLine("All animals died. :((99((9((");
+
 
 
         }

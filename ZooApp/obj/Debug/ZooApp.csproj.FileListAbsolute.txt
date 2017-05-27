@@ -6,3 +6,12 @@ C:\Users\Administrator\Desktop\binary-studio\Lecture2\ZooProject\ZooProject\ZooA
 C:\Users\Administrator\Desktop\binary-studio\Lecture2\ZooProject\ZooProject\ZooApp\obj\Debug\ZooApp.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\binary-studio\Lecture2\ZooProject\ZooProject\ZooApp\obj\Debug\ZooApp.exe
 C:\Users\Administrator\Desktop\binary-studio\Lecture2\ZooProject\ZooProject\ZooApp\obj\Debug\ZooApp.pdb
+C:\Users\Administrator\Desktop\binary-studio\Lecture3\ZooProject\ZooApp\bin\Debug\ZooApp.exe.config
+C:\Users\Administrator\Desktop\binary-studio\Lecture3\ZooProject\ZooApp\bin\Debug\ZooApp.exe
+C:\Users\Administrator\Desktop\binary-studio\Lecture3\ZooProject\ZooApp\bin\Debug\ZooApp.pdb
+C:\Users\Administrator\Desktop\binary-studio\Lecture3\ZooProject\ZooApp\bin\Debug\ZooClassLibrary.dll
+C:\Users\Administrator\Desktop\binary-studio\Lecture3\ZooProject\ZooApp\bin\Debug\ZooClassLibrary.pdb
+C:\Users\Administrator\Desktop\binary-studio\Lecture3\ZooProject\ZooApp\obj\Debug\ZooApp.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\binary-studio\Lecture3\ZooProject\ZooApp\obj\Debug\ZooApp.exe
+C:\Users\Administrator\Desktop\binary-studio\Lecture3\ZooProject\ZooApp\obj\Debug\ZooApp.pdb
+C:\Users\Administrator\Desktop\binary-studio\Lecture3\ZooProject\ZooApp\bin\Debug\System.ValueTuple.dll

@@ -13,11 +13,20 @@ namespace ZooClassLibrary.Concrete
 {
     public class ZooRepository : IRepository
     {
-        List<Animal> animals = new List<Animal>()
+        List<Animal> animals = new List<Animal>
         {
-            new Fox("Fox"),
-            new Lion("Lion2"),
-            new Bear("Bear6")
+            new Fox("Лис"),
+            new Fox("Лиса"),
+            new Tiger("Тигр"),
+            new Tiger("Тигрица"),
+            new Lion("Лев"),
+            new Lion("Львица"),
+            new Bear("Медведь"),
+            new Bear("Медведица"),
+            new Elephant("Слон"),
+            new Elephant("Слониха"),
+            new Wolf("Волк"),
+            new Wolf("Волчица")
         };
 
         public void ChangeRandomAnimalState(object obj)
@@ -104,6 +113,101 @@ namespace ZooClassLibrary.Concrete
         public void ShowAnimals()
         {
             animals.ForEach(); // Extensions.ListExtensions.cs
+        }
+
+        public void ShowAnimalsGroupedByKind()
+        {
+            var groupedAnimals = animals.GroupBy(a => a.GetType().Name);
+            
+            foreach(var kind in groupedAnimals)
+            {
+                Console.WriteLine(kind.Key);
+                kind.ForEach();
+            }
+        }
+
+
+        public void ShowAnimalsByState(State state)
+        {
+            var stateAnimals = animals.Where(a => a.State == state);
+            stateAnimals.ForEach();
+        }
+
+        public void ShowTigersWhichAreSick()
+        {
+            var sickTigers = animals.Where(a => a.GetType().Name == "Tiger" && a.State == State.Sick);
+            sickTigers.ForEach();
+        }
+
+        public void ShowElephantWithSpecifiedName(string name)
+        {
+            if (name != null)
+            {
+                var elephant = animals.FirstOrDefault(a => a.GetType().Name == "Elephant" && a.Name == name);
+                Console.WriteLine(elephant);
+            }
+            Console.WriteLine();
+
+        }
+
+        public void ShowAnimalsNamesWhichAreHungry()
+        {
+            var hungryAnimals = animals.Where(a => a.State == State.Hungry).Select(a => a.Name);
+
+            foreach (var animal in hungryAnimals)
+                Console.WriteLine(animal);
+
+            Console.WriteLine();
+        }
+
+        public void ShowTheHealthestAnimalEachKinds()
+        {
+            var animalGroups = animals.GroupBy(a => a.GetType().Name)
+                                      .Select(a => (Kind: a.Key,
+                                                    TheHealthestAnimal: a.OrderByDescending(an=>an.Health).First()));
+            foreach (var animalGroup in animalGroups)
+                Console.WriteLine($"{animalGroup.Kind} {animalGroup.TheHealthestAnimal}");
+
+            Console.WriteLine();
+        }
+
+        public void ShowCountDeadAnimalsEachKinds()
+        {
+            var animalGroups = animals.GroupBy(a => a.GetType().Name)
+                                      .Select(a => (Kind: a.Key, 
+                                                    Count: a.Count(an => an.State == State.Dead)));
+            foreach (var animalGroup in animalGroups)
+                Console.WriteLine($"{animalGroup.Kind} {animalGroup.Count}");
+
+            Console.WriteLine();
+
+        }
+
+        public void ShowAllWolfAndBearsWhichHealthAboveThree()
+        {
+            var wolfAndBears = from a in animals
+                               where (a.GetType().Name == "Wolf" ||
+                                     a.GetType().Name == "Bear") &&
+                                     a.Health > 3
+                               select a;
+
+            wolfAndBears.ForEach();
+        }
+
+        public void ShowAnimalWithMaxHealthAndAnimalWithMinHealth()
+        {
+            var maxmin = animals.OrderByDescending(a => a.Health).Take(1)
+                  .Union(animals.OrderBy(a => a.Health).Take(1));
+                        
+            maxmin.ForEach();
+
+
+        }
+
+        public void ShowAverageHealthAllAnimals()
+        {
+            var avgHealth = animals.Average(a => a.Health);
+            Console.WriteLine($"{(int)avgHealth}\n");
         }
 
         private Animal getAnimalByName(string name)

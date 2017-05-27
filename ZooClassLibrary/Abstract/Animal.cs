@@ -50,7 +50,6 @@ namespace ZooClassLibrary.Abstract
 
         public void ChangeState()
         {
-
             if (State == State.Sick)
             {
                 if (Health > 0)
@@ -77,6 +76,11 @@ namespace ZooClassLibrary.Abstract
                         State = State.Dead;
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return String.Format($"{Name}\t\t{Health}\t{MAXHEALTH}\t{State}");
         }
     }
 }

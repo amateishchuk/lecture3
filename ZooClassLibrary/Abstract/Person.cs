@@ -8,11 +8,12 @@ namespace ZooClassLibrary.Abstract
 {
     public abstract class Person
     {
-        public Command Command { get; set; }
+        public Command Command { protected get; set; }
 
         public void Run()
         {
-            Command.Execute();
+            if (Command != null)
+                Command.Execute();
         }
     }
 }
